@@ -5,15 +5,15 @@ const form = document.querySelector('.feedback-form');
 form.addEventListener('input', throttle(onInput, 500));
 form.addEventListener('submit', onClickButton);
 
-const LOCAL_DATA = 'feedback-form-state';
-const obj = localStorage.getItem(LOCAL_DATA);
+const keyStorage = 'feedback-form-state';
+const obj = localStorage.getItem(keyStorage);
 const parsedObj = JSON.parse(obj);
 
 saveInput();
 
 function onInput(e) {
   localStorage.setItem(
-    LOCAL_DATA,
+    keyStorage,
     JSON.stringify({
       email: form.elements.email.value,
       message: form.elements.message.value,
@@ -33,6 +33,6 @@ function saveInput() {
 function onClickButton(e) {
   e.preventDefault();
   e.currentTarget.reset();
-  localStorage.removeItem(LOCAL_DATA);
+  localStorage.removeItem(keyStorage);
   console.log(parsedObj);
 }
